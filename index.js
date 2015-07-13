@@ -1,4 +1,4 @@
-module.exports = function (app, db) {
+module.exports = function (db) {
   return function (opts) {
     var middleware = function (req, res, next) {
       if (opts.whitelist && opts.whitelist(req)) return next()
@@ -46,7 +46,7 @@ module.exports = function (app, db) {
 
       })
     }
-    if (opts.method && opts.path) app[opts.method](opts.path, middleware)
+    //if (opts.method && opts.path) app[opts.method](opts.path, middleware);
     return middleware
   }
 }
