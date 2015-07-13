@@ -37,11 +37,14 @@ module.exports = function (db) {
 
           if (limit.remaining) return next()
 
-          var after = (limit.reset - Date.now()) / 1000
+          //var after = (limit.reset - Date.now()) / 1000
+          var after = Math.ceil((limit.reset - Date.now()) / 1000);
 
           if (!opts.skipHeaders) res.set('Retry-After', after)
 
-          res.status(429).send('Rate limit exceeded')
+          //res.status(429).send('Rate limit exceeded')
+          var error = {code:'status.429',variable:{variable0:after}};
+          res.json(429,error);
         })
 
       })
