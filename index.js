@@ -29,6 +29,10 @@ module.exports = function (db) {
         // do not allow negative remaining
         limit.remaining = Math.max(Number(limit.remaining) - 1, 0)
         db.set(key, JSON.stringify(limit), 'PX', opts.expire, function (e) {
+          if(e){
+            console.log(e);
+            res.send(500, e);
+          }
           if (!opts.skipHeaders) {
             res.set('X-RateLimit-Limit', limit.total)
             res.set('X-RateLimit-Remaining', limit.remaining)
