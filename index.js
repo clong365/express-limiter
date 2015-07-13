@@ -43,7 +43,7 @@ module.exports = function (db) {
           if (!opts.skipHeaders) res.set('Retry-After', after)
 
           //res.status(429).send('Rate limit exceeded')
-          var error = {code:'status.429',variable:{variable0:after}};
+          var error = {code:'common.rateLimit',variable:{variable0:after}};
           res.json(429,error);
         })
 
